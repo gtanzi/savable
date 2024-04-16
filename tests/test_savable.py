@@ -2,7 +2,7 @@ import unittest
 from tempfile import TemporaryDirectory
 from pathlib import Path
 import os
-from savable.savable import Savable, NotSimplySerializable, _make_path, _bind_signature_dict, MissingMandatoryArgument
+from context import Savable, NotSimplySerializable, _make_path, _bind_signature_dict, MissingMandatoryArgument
 
 
 class MyObject(Savable):

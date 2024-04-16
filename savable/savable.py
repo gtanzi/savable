@@ -123,12 +123,12 @@ class Savable:
 
     def to_pickle(self, path: Union[str, Path]):
         if not _is_pickable(self):
-            print('WARNING: This object is not pickable! You may have problems loading it back.')
+            logger.warning('This object is not pickable! You may have problems loading it back.')
 
         path_as_pkl = _make_path(path, suffix=['.pkl', '.pickle'])
         with open(path_as_pkl, 'wb') as f:
             pickle.dump(self, f)
-        print(f'{self} saved to "{path_as_pkl}"')
+        logger.debug(f'{self} saved to "{path_as_pkl}"')
 
     def to_zip(self, path: Union[str, Path]):
         path_as_zip = _make_path(path, suffix='.zip')
@@ -141,7 +141,7 @@ class Savable:
             tmp_pickle = tmp_folder / f"{file_name}.pkl"
             self.to_pickle(tmp_pickle)
             shutil.make_archive(path_as_zip.with_suffix(''), 'zip', tmp_folder)
-            print(f'{self} saved to "{path_as_zip}"')
+            logger.debug(f'{self} saved to "{path_as_zip}"')
         finally:
             shutil.rmtree(tmp_folder)
 
@@ -184,7 +184,7 @@ class Savable:
         path_as_json = _make_path(path, suffix=['.json', '.cfg'])
         with open(path_as_json, 'w') as f:
             json.dump(self.to_dict(), f, indent=4, sort_keys=True)
-        print(f'{self} saved to "{path_as_json}"')
+        logger.debug(f'{self} saved to "{path_as_json}"')
 
     def save(self, path: Union[str, Path]):
         if Path(path).suffix == '.zip':
