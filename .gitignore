@@ -1,3 +1,6 @@
 .idea/
 savable/__pycache__/
 tests/__pycache__/
+.pypirc
+savable.egg-info/
+dist/
